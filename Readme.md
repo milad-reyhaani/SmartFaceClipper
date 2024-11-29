@@ -171,8 +171,8 @@ import os
 # Step 1: Get Access Token
 url_token = "http://127.0.0.1:8000/token/"
 token_payload = {
-    "username": "milad",
-    "password": "123456"
+    "username": "user",
+    "password": "password"
 }
 response_token = requests.post(url_token, json=token_payload)
 response_token.raise_for_status()  # Ensure the request was successful
