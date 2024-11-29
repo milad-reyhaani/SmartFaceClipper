@@ -51,12 +51,12 @@ Place all the images you want to crop in the following directory of your project
 ```
 
 ## Endpoints
-- http://127.0.0.1:8000/token/
+### 1- http://127.0.0.1:8000/token/
 Generate a JWT token for authentication to access other endpoints.
-- http://127.0.0.1:8000/singleimage/
+### 2- http://127.0.0.1:8000/singleimage/
 Process an image by providing its name in the request body, returning the cropped image as a base64 string.
 
-### Sample Use Case
+#### Sample Use Case
 ```
 import requests
 import base64
@@ -103,3 +103,111 @@ print(f"Image saved at: {file_path}")
 - Replace "example" in the body with the name of the image file you want to crop.
 - The cropped image will be saved in the specified directory (e.g., D:\124.jpg).
 - You can use the generated base64 string in your automation environment.
+
+### 3- http://127.0.0.1:8000/modified_time_query/
+Crop multiple image files based on their modified time.
+#### Sample Use Case
+```
+import requests
+import base64
+import os
+
+# Step 1: Get Access Token
+url_token = "http://127.0.0.1:8000/token/"
+token_payload = {
+    "username": "user",
+    "password": "password"
+}
+response_token = requests.post(url_token, json=token_payload)
+response_token.raise_for_status()  # Ensure request was successful
+access_token = response_token.json().get("access")
+
+# Step 2: Set Authorization Header
+headers = {
+    "Authorization": f"Bearer {access_token}",
+    "Content-Type": "application/json"
+}
+
+# Step 3: Query Data
+url_query = "http://127.0.0.1:8000/modified_time_query/"
+body = {
+    "from_date": "2024/11/01",
+    "to_date": "2024/11/29"
+}
+response_query = requests.post(url_query, json=body, headers=headers)
+response_query.raise_for_status()
+data = response_query.json()
+
+# Step 4: Process Each User's Image
+output_directory = r"D:\Images"
+os.makedirs(output_directory, exist_ok=True)  # Ensure output directory exists
+
+for user in data:
+    # Decode base64 data
+    binary_image_data = base64.b64decode(user["base64_image"])
+    
+    # Save as JPEG
+    image_name = user["ImageName"]
+    file_path = os.path.join(output_directory, f"{image_name}.jpg")
+    with open(file_path, "wb") as image_file:
+        image_file.write(binary_image_data)
+    
+    print(f"Image saved at: {file_path}")
+```
+#### Notes:
+- Replace "username" and "password" with the credentials of the account created in the previous section.
+- Modify the from_date and to_date for batch processing, you should specify the time you would like to target your images.
+- The cropped images will be saved in the specified directory (e.g., D:\Images).
+- You can use the generated base64 strings directly in your automation environment or save them as image files.
+
+### 4- http://127.0.0.1:8000/allimages/
+Crop all image files in the `\static\Images` directory.
+#### Sample Use Case
+```
+import requests
+import base64
+import os
+
+# Step 1: Get Access Token
+url_token = "http://127.0.0.1:8000/token/"
+token_payload = {
+    "username": "milad",
+    "password": "123456"
+}
+response_token = requests.post(url_token, json=token_payload)
+response_token.raise_for_status()  # Ensure the request was successful
+access_token = response_token.json().get("access")
+
+# Step 2: Set Authorization Header
+headers = {
+    "Authorization": f"Bearer {access_token}",
+    "Content-Type": "application/json"
+}
+
+# Step 3: Fetch User Data
+url_images = "http://127.0.0.1:8000/allimages/"
+response_images = requests.get(url_images, headers=headers)
+response_images.raise_for_status()
+user_data = response_images.json()
+
+# Step 4: Process Each User's Image
+output_directory = r"D:\Images"
+os.makedirs(output_directory, exist_ok=True)  # Ensure output directory exists
+
+for user in user_data:
+    # Decode base64 data
+    binary_image_data = base64.b64decode(user["base64_image"])
+    
+    # Save as JPEG
+    image_name = user["ImageName"]
+    file_path = os.path.join(output_directory, f"{image_name}.jpg")
+    with open(file_path, "wb") as image_file:
+        image_file.write(binary_image_data)
+    
+    print(f"Image saved at: {file_path}")
+```
+#### Notes:
+- Replace "username" and "password" with the credentials of the account created in the previous section.
+- The /allimages/ endpoint processes every image in the \static\Images directory.
+- The cropped images will be saved in the specified directory (e.g., D:\Images).
+- You can use the generated base64 strings directly in your automation environment or save them as image files.
