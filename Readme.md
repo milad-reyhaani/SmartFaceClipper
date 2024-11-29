@@ -1,6 +1,6 @@
 # SmartFaceClipper
 
-This project is a Python-based web application built with **Django** and **OpenCV** for efficient face detection and cropping. It allows users to upload images, detect faces using OpenCV’s face recognition algorithms, and generate **base64-encoded strings** of the cropped face images. These strings can be easily integrated into web applications or APIs.
+This project is a Python-based web application built with **Django** and **OpenCV** for efficient face detection and cropping. It can crop faces from images of any size, regardless of face position or people’s heights. The application uses OpenCV’s face recognition algorithms to detect faces and generate **base64-encoded strings** of the cropped images, easily integrable into web applications or APIs.
 
 ![SmartFaceClipper](https://github.com/milad-reyhaani/SmartFaceClipper/blob/master/static/Docs/Cover.jpg)
 
