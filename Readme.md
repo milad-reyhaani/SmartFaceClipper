@@ -35,10 +35,13 @@ python manage.py createsuperuser
 ```
 
 Follow the prompts to provide:
-Username
-Email address
-Password
-Once created, you can log in to the Django admin panel or use the superuser credentials for additional API functionalities.
+Username, Email address and Password. Once created, you can log in to the Django admin panel or use the superuser credentials for additional API functionalities.
+
+- Run below command to apply any migration:
+```
+python manage.py migrate
+```
+
 - Finally, run your Django application:
 ```
 python manage.py runserver
