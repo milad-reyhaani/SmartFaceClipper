@@ -1,20 +1,22 @@
 # SmartFaceClipper
 
-This project is a Python-based application built with Django and OpenCV for face detection and cropping. It takes an input image, detects the face(s) using OpenCV's face recognition capabilities, and generates a base64-encoded string of the cropped face image.
+This project is a Python-based web application built with Django and OpenCV for efficient face detection and cropping. It allows users to upload images, detect faces using OpenCV’s face recognition algorithms, and generate base64-encoded strings of the cropped face images. These strings can be easily integrated into web applications or APIs.
 
 ![SmartFaceClipper](https://github.com/milad-reyhaani/SmartFaceClipper/blob/master/static/Docs/Cover.jpg)
 
 ## Key Features
-- Face detection using OpenCV.
-- Crops the detected face(s) from the input image.
-- Converts cropped images to base64 format for easy integration into web or API-based solutions.
-- Built with Django for robust backend processing.
-- **JWT authentication** for secure access to API endpoints.
+- **Face Detection:** Automatically detects faces in images using OpenCV’s advanced face recognition capabilities.
+- **Face Cropping:** Crops detected faces from the input image, ensuring a focused and clear face for further use.
+- **Base64 Encoding:** Converts the cropped face image into a base64-encoded string, making it suitable for seamless integration with web or API-based applications.
+- **Multiple Endpoints:** Supports various operations, such as cropping images based on modified times or cropping all images in a directory.
+- **JWT Authentication:** Secures access to the API using JWT authentication, ensuring authorized and controlled access to the application.
+- **Built with Django:** Provides a robust backend that facilitates easy deployment, scalability, and management.
 
 ## Use Cases
-- Profile photo processing.
-- Secure identity verification.
-- Face-based content filtering.
+- **Profile Photo Processing:** This application can be used to crop and standardize profile photos for organizations, ensuring consistency in employee pictures. It's particularly useful for applications like Microsoft Exchange, which often require profile photo uniformity across their platforms.
+- **Identity Verification:** Crop face images for secure identity verification in various systems.
+- **Content Filtering:** Automatically filter and crop faces from images, useful in content moderation and social media platforms.
+- **Corporate Systems Integration:** Standardize profile photos for employees across corporate systems and applications to ensure uniformity in platforms like HR systems, internal directories, and more.
 
 ## Getting Started
 Clone the repository, follow the setup instructions, and deploy it locally or on a server to get started.
